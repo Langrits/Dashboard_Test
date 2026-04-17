@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-df = pd.read_csv('sales_data.csv')
+df = pd.read_csv('./data/sales_data.csv')
 df['date'] = pd.to_datetime(df['date'])
 
 # KPI 카드 4개
