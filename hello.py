@@ -2,8 +2,12 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-df = pd.read_csv('./data/sales_data.csv')
-df['date'] = pd.to_datetime(df['date'])
+@st.cache_data
+def load_data():
+    df = pd.read_csv('sales_data.csv')
+    df['date'] = pd.to_datetime(df['date'])
+    return df
+df = load_data()
 
 # KPI 카드 4개
 col1, col2, col3, col4 = st.columns(4)
@@ -23,13 +27,6 @@ with tab2:
 # 원본 데이터 expander
 with st.expander('원본 데이터'):
     st.dataframe(df, use_container_width=True)
-
-@st.cache_data
-def load_data():
-    df = pd.read_csv('sales_data.csv')
-    df['date'] = pd.to_datetime(df['date'])
-    return df
-df = load_data()
 
 # 사이드바 필터
 with st.sidebar:
